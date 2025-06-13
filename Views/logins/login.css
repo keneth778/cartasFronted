@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-container {
+    background-color: #fff;
+    padding: 30px 40px;
+    border: 3rem solid #80B7D5;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 50rem;
+    height: 30rem;
+  }
+  
+  .logo {
+    width: 70px;
+    margin-bottom: 15px;
+  }
+  
+  h2 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  label{
+    display: flex;
+    text-align: start;
+  }
+  
+  
+  input[type="email"],
+  input[type="password"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  
+  .Ingreso {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  
+  .btnRegistro{
+    color: black;
+    border: none;
+   
+  }
+
+  

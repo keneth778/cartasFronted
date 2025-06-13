@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .nivel-container {
+    display: flex;
+    background-color: #fff;
+    border: 2rem solid #E6F4EA;
+    padding: 20px 40px;
+    width: 70%;
+    max-width: 1000px;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .logo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .logo-area img {
+    width: 80px;
+    height: auto;
+  }
+  
+  .regresar-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .regresar-btn:hover {
+    background-color: #c82333;
+  }
+  
+  .nivel-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .nivel-info h2 {
+    margin-bottom: 10px;
+  }
+  
+  .contador {
+    background-color: #f8d7da;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+  }
+  
+  .botones-nivel {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .botones-nivel button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .botones-nivel button.selected {
+    background-color: #28a745;
+  }
+  
+  .codigo-btn {
+    background-color: #6c757d;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .codigo-btn:hover {
+    background-color: #5a6268;
+  }
+  

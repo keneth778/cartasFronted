@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+    margin: 0;
+  }
+  
+  .codePartida-container {
+    background: #ffffff;
+    padding: 2rem;
+    border: 3rem solid #A7D7A3;
+    width: 50rem;
+    height: 28rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logo-titulo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    
+  }
+  
+  .logo-titulo img {
+    width: 70px;
+    height: 60px;
+  }
+  
+  .logo-titulo h2 {
+    font-size: 24px;
+    color: #F6AC0B;
+  }
+  
+  .iusuario {
+    width: 70%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  .icodigo{
+    width: 70%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+  
+  .avatar-section {
+    text-align: center;
+  }
+  
+  .avatar-section h3 {
+    margin-bottom: 10px;
+  }
+  
+  .avatar-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    justify-items: center;
+    margin-top: 10px;
+  }
+  
+  .avatar-options img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  
+  
+  .btn_ingresar {
+    width: 8rem;
+    height: 2.5rem;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    border-radius: 5px;
+  }
+  
