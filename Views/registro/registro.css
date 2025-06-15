@@ -6,9 +6,9 @@ body {
     height: 100vh;
     background-color: #f0f2f5;
     margin: 0;
-  }
+}
   
-  .registro-container {
+.registro-container {
     background-color: #fff;
     padding: 30px 40px;
     border: 3rem solid #80B7D5;
@@ -17,28 +17,49 @@ body {
     align-items: center;
     width: 50rem;
     height: 30rem;
-  }
+}
   
-  .logo2 {
+.logo2 {
     width: 80px;
     margin-bottom: 20px;
-  }
-  label{
-    font-size: 1rem;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.input-container {
     display: flex;
-    text-align: start;
-  }
-  
-  input {
-    width: 100%;
+    align-items: center;
+    position: relative;
+}
+
+input {
     padding: 10px;
-    margin-top: 10px;
-    margin-bottom: 20px;
     border-radius: 5px;
     border: 1px solid #ccc;
-  }
+    width: 100%;
+    padding-right: 40px; 
+}
+
+.input-icon {
+    width: 2.5rem;
+    height: 25px;
+}
+
+.right-icon {
+    position: absolute;
+    right: 10px;
+}
+
+label {
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 8px;
+}
   
-  .enviar {
+.enviar {
     padding: 10px;
     width: 100%;
     background-color: #1877f2;
@@ -46,4 +67,5 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
+    margin-top: 10px;
+}

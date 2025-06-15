@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conecta</title>
+    <link rel="stylesheet" href="conecta.css">
+</head>
+<body>
+    <div class="contenedor-juego">
+        <div class="cabecera">
+    <div class="nivel">Nivel <span id="nivel-actual">1</span></div>
+    <div class="errores">Errores: <span id="errores">0</span></div>
+    <div class="tiempo">Tiempo: <span id="tiempo">01:00</span></div>
+    <button id="finalizar" class="boton-finalizar">Finalizar</button>
+</div>
+        
+        <div class="area-juego">
+            <div class="columna-imagenes" id="columna-imagenes">
+            </div>
+            <div class="columna-destinos" id="columna-destinos">
+            </div>
+            <div class="conexiones" id="conexiones">
+            </div>
+        </div>
+    </div>
+
+    <script src="conecta.js"></script>
+</body>
+</html>
