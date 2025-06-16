@@ -1,13 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Configuración del juego
     const config = {
         niveles: 5,
-        tiempoPorNivel: [60, 90, 120, 150, 180], // segundos por nivel
-        paresPorNivel: [3, 4, 5, 6, 7], // número de pares por nivel
-        imagenesBasePath: '../../../services/img-conecta' // Ruta base corregida
+        tiempoPorNivel: [15, 15, 20, 25, 30], 
+        paresPorNivel: [3, 4, 5, 6, 7], 
+        imagenesBasePath: '../../../services/img-conecta' 
     };
 
-    // Estado del juego
     let estado = {
         nivelActual: 1,
         tiempoRestante: 0,
@@ -20,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
         lineaTemporal: null
     };
 
-    // Elementos del DOM
     const elementos = {
         nivelActual: document.getElementById('nivel-actual'),
         tiempo: document.getElementById('tiempo'),
@@ -32,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         areaJuego: document.querySelector('.area-juego')
     };
 
-    // Inicializar el juego
     function iniciarJuego() {
         estado.nivelActual = 1;
         estado.errores = 0;
@@ -40,9 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cargarNivel(estado.nivelActual);
     }
 
-    // Cargar un nivel específico
     function cargarNivel(nivel) {
-        // Limpiar el juego
         elementos.columnaImagenes.innerHTML = '';
         elementos.columnaDestinos.innerHTML = '';
         elementos.contenedorConexiones.innerHTML = '';
@@ -50,29 +44,23 @@ document.addEventListener('DOMContentLoaded', () => {
         estado.paresCompletados = 0;
         estado.seleccionInicial = null;
 
-        // Configurar el nivel
         const indiceNivel = nivel - 1;
         estado.tiempoRestante = config.tiempoPorNivel[indiceNivel];
         const numPares = config.paresPorNivel[indiceNivel];
 
-        // Obtener imágenes para este nivel
         const imagenesNivel = obtenerImagenesParaNivel(nivel);
         
-        // Barajar las imágenes
         const imagenesBarajadas = barajarArray([...imagenesNivel]);
         const destinosBarajados = barajarArray([...imagenesNivel]);
 
-        // Crear elementos de imagen (lado izquierdo)
         imagenesBarajadas.forEach((imagen, index) => {
             crearElementoImagen(imagen, index, nivel, elementos.columnaImagenes);
         });
 
-        // Crear elementos de destino (lado derecho)
         destinosBarajados.forEach((imagen, index) => {
             crearElementoDestino(imagen, index, nivel, elementos.columnaDestinos);
         });
 
-        // Iniciar temporizador
         if (estado.temporizador) {
             clearInterval(estado.temporizador);
         }
@@ -80,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
         actualizarTemporizador();
     }
 
-    // Función para crear elementos imagen
     function crearElementoImagen(imagen, index, nivel, contenedor) {
         const elementoImagen = document.createElement('div');
         elementoImagen.className = 'imagen-conecta';
@@ -94,14 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         elementoImagen.appendChild(img);
         
-        // Eventos para dibujar líneas
         elementoImagen.addEventListener('mousedown', iniciarDibujoLinea);
         elementoImagen.addEventListener('mouseup', finalizarDibujoLinea);
         
         contenedor.appendChild(elementoImagen);
     }
 
-    // Función para crear elementos destino
     function crearElementoDestino(imagen, index, nivel, contenedor) {
         const elementoDestino = document.createElement('div');
         elementoDestino.className = 'destino-conecta';
@@ -115,13 +100,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
         elementoDestino.appendChild(img);
         
-        // Eventos para dibujar líneas
         elementoDestino.addEventListener('mouseup', finalizarDibujoLinea);
         
         contenedor.appendChild(elementoDestino);
     }
 
-    // Iniciar dibujo de línea
     function iniciarDibujoLinea(e) {
         if (estado.dibujandoLinea) return;
         
@@ -129,16 +112,13 @@ document.addEventListener('DOMContentLoaded', () => {
         estado.seleccionInicial = e.currentTarget;
         estado.seleccionInicial.classList.add('seleccionado');
         
-        // Crear línea temporal
         estado.lineaTemporal = document.createElement('div');
         estado.lineaTemporal.className = 'conexion-temporal';
         elementos.contenedorConexiones.appendChild(estado.lineaTemporal);
         
-        // Actualizar posición de la línea mientras se mueve el mouse
         elementos.areaJuego.addEventListener('mousemove', actualizarLineaTemporal);
     }
 
-    // Actualizar línea temporal mientras se mueve el mouse
     function actualizarLineaTemporal(e) {
         if (!estado.dibujandoLinea || !estado.seleccionInicial) return;
         
@@ -158,13 +138,11 @@ document.addEventListener('DOMContentLoaded', () => {
         estado.lineaTemporal.style.transform = `rotate(${angulo}deg)`;
     }
 
-    // Finalizar dibujo de línea
     function finalizarDibujoLinea(e) {
         if (!estado.dibujandoLinea || !estado.seleccionInicial) return;
         
         elementos.areaJuego.removeEventListener('mousemove', actualizarLineaTemporal);
         
-        // Eliminar línea temporal
         if (estado.lineaTemporal) {
             elementos.contenedorConexiones.removeChild(estado.lineaTemporal);
             estado.lineaTemporal = null;
@@ -172,19 +150,15 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const elementoFinal = e.currentTarget;
         
-        // Verificar si es una conexión válida (origen -> destino)
           if (estado.seleccionInicial.dataset.tipo === 'origen' && 
         elementoFinal.dataset.tipo === 'destino' &&
         estado.seleccionInicial.dataset.imagen === elementoFinal.dataset.imagen) {
         
-        // Dibujar línea permanente
         dibujarConexion(estado.seleccionInicial, elementoFinal);
         
-        // Marcar como completado (sin ocultar)
         estado.seleccionInicial.classList.add('conectado');
         elementoFinal.classList.add('correcto');
         
-        // Deshabilitar nuevos clicks
         estado.seleccionInicial.style.pointerEvents = 'none';
         elementoFinal.style.pointerEvents = 'none';
         
@@ -194,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(completarNivel, 1000);
         }
     }  else if (estado.seleccionInicial !== elementoFinal) {
-            // Error de conexión
             estado.errores++;
             elementos.errores.textContent = estado.errores;
             
@@ -207,33 +180,32 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         
-        // Resetear estado
+        
         estado.seleccionInicial.classList.remove('seleccionado');
         estado.seleccionInicial = null;
         estado.dibujandoLinea = false;
     }
 
-    // Dibujar línea de conexión entre elementos
+
     function dibujarConexion(origen, destino) {
     const rectOrigen = origen.getBoundingClientRect();
     const rectDestino = destino.getBoundingClientRect();
     const rectContenedor = elementos.contenedorConexiones.getBoundingClientRect();
     
-    // Punto de inicio (borde derecho de la imagen origen)
+  
     const x1 = rectOrigen.right - rectContenedor.left;
     const y1 = rectOrigen.top + rectOrigen.height / 2 - rectContenedor.top;
     
-    // Punto final (borde izquierdo de la imagen destino)
+   
     const x2 = rectDestino.left - rectContenedor.left;
     const y2 = rectDestino.top + rectDestino.height / 2 - rectContenedor.top;
     
-    // Calcular longitud y ángulo
+    
     const dx = x2 - x1;
     const dy = y2 - y1;
     const longitud = Math.sqrt(dx * dx + dy * dy);
     const angulo = Math.atan2(dy, dx) * 180 / Math.PI;
-    
-    // Crear elemento de línea
+ 
     const conexion = document.createElement('div');
     conexion.className = 'conexion';
     conexion.style.width = `${longitud}px`;
@@ -241,12 +213,10 @@ document.addEventListener('DOMContentLoaded', () => {
     conexion.style.top = `${y1}px`;
     conexion.style.transform = `rotate(${angulo}deg)`;
     conexion.style.transformOrigin = '0 0';
-    
-    // Añadir al contenedor
+   
     elementos.contenedorConexiones.appendChild(conexion);
     estado.conexiones.push(conexion);
 }
-    // Obtener imágenes para el nivel actual
     function obtenerImagenesParaNivel(nivel) {
         const imagenesPorNivel = {
             1: ['arbol.png', 'ballenapurple.png', 'midrofonobs.png'],
@@ -258,7 +228,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return imagenesPorNivel[nivel] || [];
     }
 
-    // Barajar un array (algoritmo Fisher-Yates)
     function barajarArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -267,7 +236,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return array;
     }
 
-    // Actualizar el temporizador
     function actualizarTemporizador() {
         estado.tiempoRestante--;
         const minutos = Math.floor(estado.tiempoRestante / 60);
@@ -280,7 +248,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Completar el nivel actual
     function completarNivel() {
         clearInterval(estado.temporizador);
         
@@ -296,13 +263,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Actualizar la interfaz de usuario    
     function actualizarUI() {
         elementos.nivelActual.textContent = estado.nivelActual;
         elementos.errores.textContent = estado.errores;
     }
 
-    // Manejar el botón de finalizar
     elementos.botonFinalizar.addEventListener('click', () => {
         if (confirm('¿Estás seguro de que quieres finalizar el juego?')) {
             clearInterval(estado.temporizador);
@@ -310,6 +275,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Iniciar el juego al cargar la página
     iniciarJuego();
 });

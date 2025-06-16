@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selecciona</title>
+    <link rel="stylesheet" href="../config.css">
+    <link rel="stylesheet" href="selecciona.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="up-card">
+            <div class="header">
+                <img src="../../../services/img/logo2.png" alt="Logo" class="logo">
+                <div class="stats">
+                    <div class="timer">1:00</div>
+                    <div class="selecciona-count">Selecciona #1</div>
+                    <div class="errors">Errores 0</div>
+                </div>
+            </div>
+            
+            <div class="level-indicator">Nivel <span id="current-level">1</span></div>
+            
+            <div class="question-container">
+                <h2 class="question" id="question-text">¿Cuál es un mono?</h2>
+            </div>
+            
+            <div class="options-container" id="options-container">
+            </div>
+            
+            <button class="next-button" id="next-button" disabled>Siguiente</button>
+        </div>
+    </div>
+    
+    <script src="selecciona.js"></script>
+</body>
+</html>
