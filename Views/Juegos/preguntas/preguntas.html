@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preguntín Animalandia</title>
+    <link rel="stylesheet" href="../config.css">
+    <link rel="stylesheet" href="preguntas.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <img src="../../../services/img/logo2.png" alt="Logo" class="logo">
+            <h1 class="game-title">Preguntín Animalandia</h1>
+        </div>
+        
+        <div class="level-indicator">Nivel <span id="current-level">1</span></div>
+        
+        <div class="content-container">
+            <div class="animal-image-container">
+                <img id="animal-image" src="" alt="Animal" class="animal-image">
+                <button class="finalizar-button" id="finalizar-button">Finalizar</button>
+            </div>
+            
+            <div class="questions-container">
+                <div class="timer-container">
+                    <div class="timer" id="timer">1:00</div>
+                    <div class="errors">Errores: <span id="error-count">0</span></div>
+                </div>
+                
+                <div class="question-group" id="questions-container">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="preguntas.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 const contenedor = document.getElementById('memoriaFrame');
 
-// 1. Configuración de niveles con rutas absolutas desde la raíz
+// Configuración de niveles
 const niveles = {
     1: {
         nombre: "Nivel 1",
@@ -22,7 +22,6 @@ const niveles = {
         columnas: 4,
         tiempo: 120,
         rutaImagenes: "/services/img-memoria/niveltres-img/"
-        
     },
     4: {
         nombre: "Nivel 4",
@@ -49,7 +48,7 @@ let tiempoRestante = 0;
 let temporizador;
 let nivelActual = 1;
 
-// 2. Función para mezclar cartas
+// Función para mezclar cartas
 function mezclarCartas(array) {
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
@@ -59,15 +58,18 @@ function mezclarCartas(array) {
     return newArray;
 }
 
-// 3. Función para crear cartas
+// Función para crear cartas
 async function crearCartas(config) {
     const gridCartas = document.createElement('div');
     gridCartas.className = 'grid-cartas';
     gridCartas.style.gridTemplateColumns = `repeat(${config.columnas}, 1fr)`;
-
-    // Verificar rutas en consola
-    console.log(`Cargando imágenes desde: ${config.rutaImagenes}`);
     
+    const filas = Math.ceil(cartas.length / config.columnas);
+    gridCartas.style.gridTemplateRows = `repeat(${filas}, 1fr)`;
+    
+    const gapSize = Math.max(5, 15 - (config.columnas * 1.5));
+    gridCartas.style.gap = `${gapSize}px`;
+
     for (const carta of cartas) {
         const cartaElement = document.createElement('div');
         cartaElement.className = 'carta';
@@ -80,7 +82,6 @@ async function crearCartas(config) {
         img.src = config.rutaImagenes + carta;
         img.alt = carta.split('.')[0];
         
-        // Manejo de error para imágenes
         img.onerror = function() {
             console.error(`Error al cargar: ${config.rutaImagenes}${carta}`);
             this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%2380B7D5"/><text x="50" y="55" font-family="Arial" font-size="10" text-anchor="middle" fill="%23fff">' + carta.split('.')[0] + '</text></svg>';
@@ -100,7 +101,7 @@ async function crearCartas(config) {
     return gridCartas;
 }
 
-// 4. Función para crear la interfaz completa
+// Función para crear la interfaz completa
 async function crearInterfaz(config) {
     const juegoContainer = document.createElement('div');
     juegoContainer.className = 'juego-container';
@@ -147,7 +148,7 @@ async function crearInterfaz(config) {
     return juegoContainer;
 }
 
-// 5. Funciones auxiliares
+// Funciones auxiliares
 function formatearTiempo(segundos) {
     const mins = Math.floor(segundos / 60);
     const secs = segundos % 60;
@@ -186,7 +187,6 @@ function verificarPareja() {
         cartasVolteadas = [];
         bloqueado = false;
         
-        // Verificar si se completó el nivel
         if (document.querySelectorAll('.carta.flip').length === cartas.length) {
             setTimeout(() => {
                 if (nivelActual < 5) {
@@ -210,7 +210,7 @@ function verificarPareja() {
     }
 }
 
-// 6. Función para iniciar nivel
+// Función para iniciar nivel
 async function iniciarNivel(nivel) {
     clearInterval(temporizador);
     contenedor.innerHTML = '';
