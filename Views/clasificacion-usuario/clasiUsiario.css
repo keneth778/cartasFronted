@@ -1,0 +1,135 @@
+body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #b4fa77;
+}
+
+.clasi-container {
+  background-color: white;
+  border: 25px solid #D0E8BB;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.logo-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.logo-clasi {
+  width: 100px;
+  height: auto;
+}
+
+.regresar-btn {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.regresar-btn:hover {
+  background-color: #c82333;
+}
+
+.content-area {
+  text-align: center;
+}
+
+.titulo-clasi {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.lista-usuarios {
+  margin-bottom: 2rem;
+}
+
+.usuario-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+.posicion-usuario {
+  font-weight: bold;
+  color: #6c757d;
+  width: 40px;
+}
+
+.avatar-usuario {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #8eb17d;
+}
+
+.nombre-usuario {
+  flex-grow: 1;
+  text-align: left;
+  padding: 0 1rem;
+  font-size: 18px;
+}
+
+.puntos-usuario {
+  font-weight: bold;
+  color: #8eb17d;
+  min-width: 80px;
+}
+
+.botones-area {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.botones-area button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-salir {
+  background-color: #D7E6A0;
+  color: rgb(0, 0, 0);
+}
+
+.btn-salir:hover {
+  background-color: #ecffdd;
+}
+
+.btn-ranking {
+  background-color:#FEE882;
+  color: rgb(0, 0, 0);
+}
+
+.btn-ranking:hover {
+  background-color: #e6e7a1;
+}
+
+.btn-descargar {
+  background-color: #FEE882;
+  color: rgb(0, 0, 0);
+}
+
+.btn-descargar:hover {
+  background-color: #e6e7a1;
+}

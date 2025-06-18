@@ -3,7 +3,6 @@ const contenedor = document.getElementById("nivelFrame");
 let container = document.createElement('div');
 container.className = 'nivel-container';
 
-// Lado izquierdo: Logo + Botón regresar
 let logoArea = document.createElement('div');
 logoArea.className = 'logo-area';
 
@@ -21,7 +20,6 @@ regresarBtn.addEventListener('click', () => {
 logoArea.appendChild(logo);
 logoArea.appendChild(regresarBtn);
 
-// Lado derecho: Contenido de niveles
 let infoArea = document.createElement('div');
 infoArea.className = 'nivel-info';
 
@@ -46,21 +44,44 @@ for (let i = 1; i <= 5; i++) {
     contadorNivel = document.querySelectorAll('.botones-nivel .selected').length;
     contador.textContent = `Niveles seleccionados: ${contadorNivel}`;
   });
-
+  
   botonesContainer.appendChild(btn);
 }
 
 let codigoBtn = document.createElement('button');
 codigoBtn.textContent = "Código de partida";
 codigoBtn.className = "codigo-btn";
-// Puedes añadir funcionalidad si deseas
+
+codigoBtn.addEventListener('click', async () => {
+    try {
+        const nivelesSeleccionados = [];
+        document.querySelectorAll('.botones-nivel .selected').forEach(btn => {
+            nivelesSeleccionados.push(btn.textContent.trim());
+        });
+
+        if (nivelesSeleccionados.length === 0) {
+            alert('Por favor selecciona al menos un nivel');
+            return;
+        }
+
+        // Importación dinámica con ruta corregida
+        const { crearVistaDarCodigo } = await import('../darcodigo/darcodigo.js');
+        
+        // Limpiar y cargar la vista
+        document.getElementById('nivelFrame').innerHTML = '';
+        document.getElementById('nivelFrame').appendChild(crearVistaDarCodigo());
+        
+    } catch (error) {
+        console.error('Error al cargar la vista:', error);
+        alert('Error al cargar la vista. Verifica la consola para más detalles.');
+    }
+});
 
 infoArea.appendChild(contador);
 infoArea.appendChild(titulo);
 infoArea.appendChild(botonesContainer);
 infoArea.appendChild(codigoBtn);
 
-// Añadir todo al contenedor principal
 container.appendChild(logoArea);
 container.appendChild(infoArea);
 contenedor.appendChild(container);

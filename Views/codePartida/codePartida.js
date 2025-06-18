@@ -3,7 +3,6 @@ const contenedor = document.getElementById('codePartidaFrame');
 let section = document.createElement('div');
 section.className = 'codePartida-container';
 
-// Logo + Título
 let logoTitulo = document.createElement('div');
 logoTitulo.className = 'logo-titulo';
 
@@ -18,14 +17,12 @@ logoTitulo.appendChild(logo);
 logoTitulo.appendChild(titulo);
 section.appendChild(logoTitulo);
 
-// Input nombre usuario
 let inputNombre = document.createElement('input');
 inputNombre.type = "text";
 inputNombre.placeholder = "Nombre de usuario";
 inputNombre.className = "iusuario";
 section.appendChild(inputNombre);
 
-// Título de avatar
 let avatarSection = document.createElement('div');
 avatarSection.className = "avatar-section";
 
@@ -33,7 +30,6 @@ let avatarTitle = document.createElement('h3');
 avatarTitle.textContent = "Elige un avatar";
 avatarSection.appendChild(avatarTitle);
 
-// Avatares
 let avatarContainer = document.createElement('div');
 avatarContainer.className = "avatar-options";
 
@@ -53,14 +49,12 @@ avatares.forEach((nombre, index) => {
 avatarSection.appendChild(avatarContainer);
 section.appendChild(avatarSection);
 
-// Input código de partida
 let inputCodigo = document.createElement('input');
 inputCodigo.type = "text";
 inputCodigo.className = "icodigo";
 inputCodigo.placeholder = "Código de partida";
 section.appendChild(inputCodigo);
 
-// Botón ingresar
 let btnIngresar = document.createElement('button');
 btnIngresar.textContent = "Ingresar";
 btnIngresar.className = "btn_ingresar";

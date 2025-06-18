@@ -1,0 +1,73 @@
+.contenedor-darcodigo {
+    background-color: white;
+    border: 25px solid rgb(222, 242, 250);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding: 20px;
+    width: 40rem;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 24px;
+    margin: 10px 0;
+    color: #000000;
+}
+
+.codigo {
+    display: inline-block;
+    width: 13rem;
+    font-size: 36px;
+    font-weight: bold;
+    color: #000000;
+    margin: 20px auto;
+    background-color: rgb(255, 208, 0);
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 3px 3px 4px gray;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #000000;
+}
+
+.btn-ver,
+.btn-siguiente {
+    display: block;
+    width: 80%;
+    max-width: 300px;
+    padding: 17px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    margin: 10px auto;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-ver {
+    background-color: #cddfce;
+    color: rgb(0, 0, 0);
+    box-shadow: 3px 3px 4px gray;
+}
+
+.btn-ver:hover {
+    background-color: #caccca;
+}
+
+.btn-siguiente {
+    background-color: #8eb17d;
+    color: rgb(0, 0, 0);
+    box-shadow: 3px 3px 4px gray;
+}
+
+.btn-siguiente:hover {
+    background-color: rgb(198, 219, 139);
+}

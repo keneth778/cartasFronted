@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ranking</title>
+  <link rel="stylesheet" href="rankingfinal.css" />
+</head>
+<body>
+  <div id="ranking-root"></div>
+
+  <script type="module">
+    import { rankingView } from './rankingFinal.js';
+
+    const root = document.getElementById('ranking-root');
+    const vista = rankingView();
+    root.appendChild(vista);
+
+    vista.addEventListener('volverNiveles', () => {
+      console.log('Evento volverNiveles capturado');
+      
+    });
+  </script>
+</body>
+</html>

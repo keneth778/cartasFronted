@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Terminaste!</title>
+  <link rel="stylesheet" href="terminaste.css">
+  <style>
+   
+  </style>
+</head>
+<body>
+  <div id="terminasteFrame"></div>
+  <script type="module">
+    import { crearVistaTerminaste } from './terminaste.js';
+    document.getElementById('terminasteFrame').appendChild(crearVistaTerminaste());
+  </script>
+</body>
+</html>

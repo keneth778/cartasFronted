@@ -8,7 +8,7 @@ body {
   height: 100vh;
 }
 
-.ranking-container {
+.rkf-container {
   background-color: white;
   border-radius: 15px;
   padding: 30px;
@@ -17,41 +17,41 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.logo {
+.rkf-logo {
   width: 80px;
   margin-bottom: 10px;
 }
 
-.titulo {
+.rkf-title {
   margin-bottom: 20px;
   font-size: 24px;
   color: #333;
 }
 
-.ranking-item {
+.rkf-item {
   display: flex;
   align-items: center;
   margin: 15px 0;
 }
 
-.avatar {
+.rkf-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin-right: 15px;
 }
 
-.user-info {
+.rkf-userinfo {
   flex-grow: 1;
   text-align: left;
 }
 
-.user-name {
+.rkf-username {
   font-weight: bold;
   font-size: 14px;
 }
 
-.bar-container {
+.rkf-bar-container {
   background-color: #f1f1f1;
   border-radius: 20px;
   height: 20px;
@@ -59,7 +59,7 @@ body {
   overflow: hidden;
 }
 
-.bar {
+.rkf-bar {
   height: 100%;
   text-align: right;
   padding-right: 8px;
@@ -69,12 +69,12 @@ body {
   border-radius: 20px;
 }
 
-.green { background-color: #7fd98b; width: 100%; }
-.yellow { background-color: #f7df6d; width: 80%; }
-.orange { background-color: #f7b17a; width: 60%; }
-.red { background-color: #f77a7a; width: 30%; }
+.rkf-bar-green { background-color: #7fd98b; width: 100%; }
+.rkf-bar-yellow { background-color: #f7df6d; width: 80%; }
+.rkf-bar-orange { background-color: #f7b17a; width: 60%; }
+.rkf-bar-red { background-color: #f77a7a; width: 30%; }
 
-.btn-regresar {
+.rkf-btn-back {
   margin-top: 30px;
   padding: 8px 16px;
   background-color: #a0cfa0;

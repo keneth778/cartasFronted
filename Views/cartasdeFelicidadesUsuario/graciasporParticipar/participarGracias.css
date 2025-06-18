@@ -1,0 +1,82 @@
+.gracias-container {
+  background-color: white;
+  border: 25px solid rgb(222, 242, 250);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  width: 95%; /* Cambiado de max-width a width para forzar el ancho */
+  max-width: 1200px; /* Aumentado el máximo ancho */
+  margin: 2rem auto;
+  padding: 3rem; /* Aumentado el padding para mejor espaciado */
+  border-radius: 15px;
+  text-align: center;
+}
+
+.img-fondo {
+  width: 400px; 
+  height: auto;
+  margin-bottom: 2rem;
+}
+
+.mensaje-gracias {
+  font-size: 2.5rem; 
+  color: #333;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .gracias-container {
+    width: 90%;
+    padding: 2rem;
+  }
+  
+  .img-fondo {
+    width: 300px;
+  }
+  
+  .mensaje-gracias {
+    font-size: 2rem;
+  }
+}
+
+.logo-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.logo-gracias {
+  width: 100px;
+  height: auto;
+}
+
+.regresar-btn {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.regresar-btn:hover {
+  background-color: #c82333;
+}
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.img-fondo {
+  width: 300px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.mensaje-gracias {
+  font-size: 32px;
+  color: #333;
+}

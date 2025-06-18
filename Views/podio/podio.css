@@ -1,0 +1,105 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #e7f6ef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#root {
+  background-color: white;
+  padding: 20px;
+  border-radius: 16px;
+  border: 5px solid #c8f2dd;
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.logo {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 60px;
+}
+
+.download {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.podium {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 20px;
+  margin-top: 50px;
+  position: relative;
+}
+
+.place {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 90px;
+  border-radius: 20px;
+  padding-top: 60px;
+  box-sizing: border-box;
+}
+
+.place img.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 4px solid white;
+  background-color: #d9f3e5;
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.place span {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.first {
+  background-color: #f6d94b;
+  height: 120px;
+}
+
+.second {
+  background-color: #d1d1d1;
+  height: 100px;
+}
+
+.third {
+  background-color: #e8b6a3;
+  height: 80px;
+}
+
+.buttons {
+  margin-top: 40px;
+}
+
+.buttons button {
+  background-color: #c8f2dd;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
