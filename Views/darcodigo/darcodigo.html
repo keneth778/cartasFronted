@@ -17,11 +17,14 @@
   </style>
 </head>
 <body>
-  <div id="root"></div>
+  <div class="contenedor-darcodigo">
+    <img src="/services/img/logo2.png" alt="Logo" class="logo">
+    <h2>Código de la partida</h2>
+    <div class="codigo" id="codigoPartida">Cargando...</div>
+    <h3>Visualizaciones</h3>
+    <button class="btn-ver" id="btnVer">Ver participantes</button>
+  </div>
 
-  <script type="module">
-    import { crearVistaDarCodigo } from './darcodigo.js';
-    document.getElementById('root').appendChild(crearVistaDarCodigo());
-  </script>
+  <script type="module" src="darcodigo.js"></script>
 </body>
 </html>

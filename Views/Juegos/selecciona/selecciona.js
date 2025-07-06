@@ -1,21 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Función para mezclar un array (algoritmo Fisher-Yates)
-    function shuffleArray(array) {
-        const newArray = [...array];
-        for (let i = newArray.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-        }
-        return newArray;
-    }
-
-    // Estructura completa de niveles con imágenes exactas
-    const levels = {
+    // Configuración base de niveles
+    const nivelesBase = {
         1: {
-            name: "Animales Básicos",
+            name: "Nivel 1",
             parts: [
                 {
-                    // Parte 1 del Nivel 1 (2 imágenes)
                     question: "¿Cuál es un mono?",
                     options: [
                         { image: "../../../services/img-selecciona/niveluno/parte-1/mono.png", correct: true },
@@ -23,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     ]
                 },
                 {
-                    // Parte 2 del Nivel 1 (3 imágenes)
                     question: "¿Cuál es una serpiente?",
                     options: [
                         { image: "../../../services/img-selecciona/niveluno/parte-2/serpiente.png", correct: true },
@@ -34,10 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         2: {
-            name: "Animales Variados",
+            name: "Nivel 2",
             parts: [
                 {
-                    // Parte 1 del Nivel 2 (4 imágenes)
                     question: "¿Cuál es una zorrillo?",
                     options: [
                         { image: "../../../services/img-selecciona/niveldos/parte-1/zorrillo.png", correct: true },
@@ -47,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     ]
                 },
                 {
-                    // Parte 2 del Nivel 2 (4 imágenes)
                     question: "¿Cuál es un pez?",
                     options: [
                         { image: "../../../services/img-selecciona/niveldos/parte-2/pez.png", correct: true },
@@ -59,10 +45,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         3: {
-            name: "Animales Marinos e Insectos",
+            name: "Nivel 3",
             parts: [
                 {
-                    // Parte 1 del Nivel 3 (5 imágenes)
                     question: "¿Cuál es un cangrejo?",
                     options: [
                         { image: "../../../services/img-selecciona/niveltres/parte-1/cangrejo.png", correct: true },
@@ -73,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     ]
                 },
                 {
-                    // Parte 2 del Nivel 3 (6 imágenes)
                     question: "¿Cuál es una mariquita?",
                     options: [
                         { image: "../../../services/img-selecciona/niveltres/parte-1/mariquita.png", correct: true },
@@ -87,10 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         4: {
-            name: "Animales Diversos",
+            name: "Nivel 4",
             parts: [
                 {
-                    // Parte 1 del Nivel 4 (7 imágenes)
                     question: "¿Cuál es un pulpo?",
                     options: [
                         { image: "../../../services/img-selecciona/nivelcuatro/parte-1/pulpo.png", correct: true },
@@ -103,7 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     ]
                 },
                 {
-                    // Parte 2 del Nivel 4 (8 imágenes)
                     question: "¿Cuál es una ardilla?",
                     options: [
                         { image: "../../../services/img-selecciona/nivelcuatro/parte-1/ardilla.png", correct: true },
@@ -119,10 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         },
         5: {
-            name: "Animales Complejos",
+            name: "Nivel 5",
             parts: [
                 {
-                    // Parte 1 del Nivel 5 (12 imágenes)
                     question: "¿Cuál es un conejo?",
                     options: [
                         { image: "../../../services/img-selecciona/nivelcinco/parte-1/conejo.png", correct: true },
@@ -140,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     ]
                 },
                 {
-                    // Parte 2 del Nivel 5 (16 imágenes)
                     question: "¿Cuál es un lobo?",
                     options: [
                         { image: "../../../services/img-selecciona/nivelcinco/parte-2/lobo.png", correct: true },
@@ -165,156 +145,305 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    let currentLevel = 1;
-    let currentPart = 0;
-    let errors = 0;
-    let selections = 0;
-    let timerInterval;
-    let timeLeft = 60;
-    let selectedOption = null;
+    // Variables del juego
+    let estado = {
+        nivelActual: 0,
+        parteActual: 0,
+        errores: 0,
+        aciertos: 0,
+        tiempoRestante: 0,
+        temporizador: null,
+        seleccionActual: null,
+        nivelesConfigurados: [],
+        tiempoPorNivel: 60,
+        dificultad: 'medio',
+        alumnoActual: null,
+        partidaActual: null
+    };
 
     // Elementos del DOM
-    const questionElement = document.getElementById('question-text');
-    const optionsContainer = document.getElementById('options-container');
-    const nextButton = document.getElementById('next-button');
-    const timerElement = document.querySelector('.timer');
-    const seleccionaCountElement = document.querySelector('.selecciona-count');
-    const errorsElement = document.querySelector('.errors');
-    const currentLevelElement = document.getElementById('current-level');
+    const elementos = {
+        pregunta: document.getElementById('question-text'),
+        opcionesContainer: document.getElementById('options-container'),
+        siguienteBoton: document.getElementById('next-button'),
+        temporizador: document.querySelector('.timer'),
+        contadorSelecciona: document.querySelector('.selecciona-count'),
+        contadorErrores: document.querySelector('.errors'),
+        nivelActual: document.getElementById('current-level')
+    };
 
-    // Inicializar el juego
-    function initGame() {
-        loadLevelPart(currentLevel, currentPart);
-        startTimer();
+    // Función para mezclar un array (algoritmo Fisher-Yates)
+    function barajarArray(array) {
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
     }
 
-    // Cargar parte del nivel
-    function loadLevelPart(level, part) {
-        const levelData = levels[level];
-        if (!levelData) {
+    // Función para obtener configuración de la partida
+    async function obtenerConfiguracionPartida() {
+        try {
+            estado.partidaActual = JSON.parse(localStorage.getItem('partidaActual'));
+            estado.alumnoActual = JSON.parse(localStorage.getItem('alumnoActual'));
+            
+            if (!estado.partidaActual?.id || !estado.alumnoActual?.id) {
+                throw new Error('No se encontró información de partida o alumno en localStorage');
+            }
+
+            // Validar que la partida está configurada correctamente
+            const validacionResponse = await fetch(`http://localhost:3000/api/validar-partida/${estado.partidaActual.id}`);
+            const validacionData = await validacionResponse.json();
+
+            if (!validacionResponse.ok || !validacionData.valida) {
+                throw new Error(validacionData.error || 'No se pudo cargar la configuración del profesor. No se puede iniciar el juego.');
+            }
+
+            // Obtener configuración completa
+            const response = await fetch(`http://localhost:3000/api/partida/${estado.partidaActual.id}`);
+            
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'No se pudo cargar la configuración del profesor. No se puede iniciar el juego.');
+            }
+
+            const data = await response.json();
+            
+            // Validar que tiene configuración completa
+            if (!data.configurada || !data.niveles || data.niveles.length === 0 || !data.dificultad) {
+                throw new Error('No se pudo cargar la configuración del profesor. No se puede iniciar el juego.');
+            }
+
+            // Estructurar configuración final
+            return {
+                niveles: data.niveles,
+                dificultad: data.dificultad,
+                tiempoPorNivel: data.tiempoPorNivel,
+                configurada: true
+            };
+
+        } catch (error) {
+            console.error('Error crítico al obtener configuración:', error);
+            alert(error.message || 'No se pudo cargar la configuración del profesor. No se puede iniciar el juego.');
+            window.location.href = "../entradaAlumno/entradaAlumno.html";
+            throw error;
+        }
+    }
+
+    // Función principal para inicializar el juego
+    async function inicializarJuego() {
+        try {
+            // Obtener configuración del profesor
+            const config = await obtenerConfiguracionPartida();
+            
+            // Aplicar configuración a variables globales
+            estado.nivelesConfigurados = config.niveles;
+            estado.tiempoPorNivel = config.tiempoPorNivel;
+            estado.dificultad = config.dificultad;
+
+            // Verificar que tenemos al menos un nivel
+            if (estado.nivelesConfigurados.length === 0) {
+                throw new Error('No se pudo cargar la configuración del profesor. No se puede iniciar el juego.');
+            }
+
+            // Iniciar primer nivel
+            estado.nivelActual = 0;
+            cargarParteNivel(estado.nivelesConfigurados[estado.nivelActual], estado.parteActual);
+
+        } catch (error) {
+            console.error('Error crítico al inicializar juego:', error);
+            alert('No se pudo cargar la configuración del profesor. No se puede iniciar el juego.');
+            window.location.href = "../entradaAlumno/entradaAlumno.html";
+        }
+    }
+
+    // Función para cargar una parte específica de un nivel
+    function cargarParteNivel(nivel, parte) {
+        const nivelData = nivelesBase[nivel];
+        if (!nivelData) {
             alert('¡Nivel no encontrado!');
             return;
         }
 
-        if (part >= levelData.parts.length) {
-            // Nivel completado
-            if (level < Object.keys(levels).length) {
-                // Pasar al siguiente nivel
-                currentLevel++;
-                currentPart = 0;
-                loadLevelPart(currentLevel, currentPart);
+        if (parte >= nivelData.parts.length) {
+            // Parte completada, pasar al siguiente nivel
+            if (estado.nivelActual < estado.nivelesConfigurados.length - 1) {
+                estado.nivelActual++;
+                estado.parteActual = 0;
+                cargarParteNivel(estado.nivelesConfigurados[estado.nivelActual], estado.parteActual);
             } else {
-                // Juego completado
-                alert('¡Felicidades! Has completado todos los niveles.');
+                // Todos los niveles completados
+                finalizarJuego(true);
             }
             return;
         }
 
-        const partData = levelData.parts[part];
-        questionElement.textContent = partData.question;
-        optionsContainer.innerHTML = '';
-        selectedOption = null;
+        const parteData = nivelData.parts[parte];
+        elementos.pregunta.textContent = parteData.question;
+        elementos.opcionesContainer.innerHTML = '';
+        estado.seleccionActual = null;
 
         // Configurar clase CSS según el nivel para el diseño de columnas
-        optionsContainer.className = 'options-container';
-        optionsContainer.classList.add(`level-${level}`);
+        elementos.opcionesContainer.className = 'options-container';
+        elementos.opcionesContainer.classList.add(`level-${nivel}`);
 
         // Mostrar número de nivel actual
-        currentLevelElement.textContent = level;
+        elementos.nivelActual.textContent = nivel;
 
         // Mezclar las opciones antes de mostrarlas
-        const shuffledOptions = shuffleArray([...partData.options]);
+        const opcionesBarajadas = barajarArray([...parteData.options]);
         
         // Crear opciones mezcladas
-        shuffledOptions.forEach((option, index) => {
-            const optionElement = document.createElement('div');
-            optionElement.className = 'option';
+        opcionesBarajadas.forEach((opcion, index) => {
+            const opcionElemento = document.createElement('div');
+            opcionElemento.className = 'option';
             
-            const imgElement = document.createElement('img');
-            imgElement.src = option.image;
-            imgElement.alt = `Opción ${index + 1}`;
+            const imgElemento = document.createElement('img');
+            imgElemento.src = opcion.image;
+            imgElemento.alt = `Opción ${index + 1}`;
             
-            optionElement.appendChild(imgElement);
-            optionElement.addEventListener('click', () => selectOption(optionElement, option.correct));
-            optionsContainer.appendChild(optionElement);
+            opcionElemento.appendChild(imgElemento);
+            opcionElemento.addEventListener('click', () => seleccionarOpcion(opcionElemento, opcion.correct));
+            elementos.opcionesContainer.appendChild(opcionElemento);
         });
 
         // Actualizar contadores
-        seleccionaCountElement.textContent = `Selecciona #${part + 1}`;
-        errorsElement.textContent = `Errores ${errors}`;
+        elementos.contadorSelecciona.textContent = `Selecciona #${parte + 1}`;
+        elementos.contadorErrores.textContent = `Errores ${estado.errores}`;
         
         // Reiniciar estado del botón Siguiente
-        nextButton.disabled = true;
+        elementos.siguienteBoton.disabled = true;
+        
+        // Iniciar temporizador
+        iniciarTemporizador();
     }
 
-    // Manejar selección de opción
-    function selectOption(optionElement, isCorrect) {
-        if (selectedOption !== null) return;
+    // Función para manejar selección de opción
+    function seleccionarOpcion(opcionElemento, esCorrecta) {
+        if (estado.seleccionActual !== null) return;
         
-        selectedOption = optionElement;
-        optionElement.classList.add('selected');
-        selections++;
+        estado.seleccionActual = opcionElemento;
+        opcionElemento.classList.add('selected');
 
-        if (isCorrect) {
-            optionElement.classList.add('correct');
-            nextButton.disabled = false;
+        if (esCorrecta) {
+            opcionElemento.classList.add('correct');
+            estado.aciertos++;
+            elementos.siguienteBoton.disabled = false;
         } else {
-            optionElement.classList.add('incorrect');
-            errors++;
-            errorsElement.textContent = `Errores ${errors}`;
+            opcionElemento.classList.add('incorrect');
+            estado.errores++;
+            elementos.contadorErrores.textContent = `Errores ${estado.errores}`;
             
             // Mostrar la opción correcta
-            const options = optionsContainer.querySelectorAll('.option');
-            options.forEach(opt => {
+            const opciones = elementos.opcionesContainer.querySelectorAll('.option');
+            opciones.forEach(opt => {
                 const imgSrc = opt.querySelector('img').src;
-                const correctOption = levels[currentLevel].parts[currentPart].options.find(o => o.correct);
-                if (opt !== optionElement && imgSrc.includes(correctOption.image)) {
+                const opcionCorrecta = nivelesBase[estado.nivelesConfigurados[estado.nivelActual]].parts[estado.parteActual].options.find(o => o.correct);
+                if (opt !== opcionElemento && imgSrc.includes(opcionCorrecta.image)) {
                     opt.classList.add('correct');
                 }
             });
             
-            nextButton.disabled = false;
+            elementos.siguienteBoton.disabled = false;
         }
     }
 
-    // Pasar a la siguiente parte
-    function nextPart() {
-        currentPart++;
-        resetTimer();
-        loadLevelPart(currentLevel, currentPart);
+    // Función para pasar a la siguiente parte
+    function siguienteParte() {
+        estado.parteActual++;
+        cargarParteNivel(estado.nivelesConfigurados[estado.nivelActual], estado.parteActual);
     }
 
     // Temporizador
-    function startTimer() {
-        clearInterval(timerInterval);
-        timeLeft = 30;
-        updateTimerDisplay();
+    function iniciarTemporizador() {
+        clearInterval(estado.temporizador);
+        estado.tiempoRestante = estado.tiempoPorNivel;
+        actualizarTemporizador();
         
-        timerInterval = setInterval(() => {
-            timeLeft--;
-            updateTimerDisplay();
+        estado.temporizador = setInterval(() => {
+            estado.tiempoRestante--;
+            actualizarTemporizador();
 
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                nextPart();
+            if (estado.tiempoRestante <= 0) {
+                clearInterval(estado.temporizador);
+                siguienteParte();
             }
         }, 1000);
     }
 
-    function resetTimer() {
-        clearInterval(timerInterval);
-        startTimer();
+    function actualizarTemporizador() {
+        const minutos = Math.floor(estado.tiempoRestante / 60);
+        const segundos = estado.tiempoRestante % 60;
+        elementos.temporizador.textContent = `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
     }
 
-    function updateTimerDisplay() {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    // Función para guardar resultados en la base de datos
+async function guardarResultadoNivel(completado) {
+    const tiempoUsado = estado.tiempoPorNivel - estado.tiempoRestante;
+    
+    try {
+        // Verificar que tenemos los datos necesarios
+        if (!estado.partidaActual?.id || !estado.alumnoActual?.id) {
+            throw new Error('Datos de partida o alumno incompletos');
+        }
+
+        const response = await fetch('http://localhost:3000/api/guardar-resultado-selecciona', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id_usuario: estado.alumnoActual.id,
+                nombre: estado.alumnoActual.nombre,
+                avatar: estado.alumnoActual.avatar || 'default.png',
+                id_partida: estado.partidaActual.id, // Asegurar que se envía el ID de partida
+                nivel: estado.nivelesConfigurados[estado.nivelActual],
+                aciertos: estado.aciertos,
+                errores: estado.errores,
+                tiempo_usado: tiempoUsado,
+                dificultad: estado.dificultad,
+                puntaje: calcularPuntaje(estado.aciertos, estado.errores, tiempoUsado)
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Error al guardar resultados');
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error('Error al guardar resultados:', error);
+        throw error;
+    }
+}
+
+function calcularPuntaje(aciertos, errores, tiempoUsado) {
+    // Fórmula de puntuación: (aciertos * 10) - (errores * 2) - (tiempoUsado / 10)
+    return Math.max(0, (aciertos * 10) - (errores * 2) - Math.floor(tiempoUsado / 10));
+}
+    // Función para finalizar el juego
+    async function finalizarJuego(completado) {
+        clearInterval(estado.temporizador);
+        
+        try {
+            await guardarResultadoNivel(completado);
+            
+            if (completado) {
+                alert('¡Felicidades! Has completado todos los niveles del juego.');
+            } else {
+                alert(`Juego finalizado. Alcanzaste el nivel ${estado.nivelesConfigurados[estado.nivelActual]}`);
+            }
+            
+            window.location.href = "/Views/rankingFinal/rankingFinal.html";
+        } catch (error) {
+            console.error("Error al finalizar juego:", error);
+            alert("Ocurrió un error al guardar tus resultados. Inténtalo de nuevo.");
+        }
     }
 
     // Evento para el botón Siguiente
-    nextButton.addEventListener('click', nextPart);
+    elementos.siguienteBoton.addEventListener('click', siguienteParte);
 
     // Iniciar el juego
-    initGame();
+    inicializarJuego();
 });

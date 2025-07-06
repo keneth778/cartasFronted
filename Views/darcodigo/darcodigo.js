@@ -1,26 +1,36 @@
-export function crearVistaDarCodigo() {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = '/Views/darcodigo/darcodigo.css'; 
-  document.head.appendChild(link);
+document.addEventListener('DOMContentLoaded', async () => {
+  // Elementos del DOM
+  const codigoElement = document.getElementById('codigoPartida');
+  const btnVer = document.getElementById('btnVer');
+  const btnSiguiente = document.getElementById('btnSiguiente');
 
-  const contenedor = document.createElement('div');
-  contenedor.classList.add('contenedor-darcodigo');
+  try {
+    // Obtener el código real de la base de datos
+    const partidaActual = JSON.parse(localStorage.getItem('partidaActual'));
+    const response = await fetch(`http://localhost:3000/api/partida/${partidaActual.id}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
 
-  contenedor.innerHTML = `
-    <img src="/services/img/logo2.png" alt="Logo" class="logo">
-    <h2>Código de la partida</h2>
-    <div class="codigo">${Math.random().toString(36).substring(2, 8).toUpperCase()}</div>
-    <h3>Visualizaciones</h3>
-    <button class="btn-ver">Ver participantes</button>
-    <button class="btn-siguiente">Siguiente</button>
-  `;
+    const data = await response.json();
 
-  // Redirección simple al hacer clic en "Ver participantes"
-  const btnVer = contenedor.querySelector('.btn-ver');
-  btnVer.addEventListener('click', () => {
-    window.location.href = '../participantes/participante.html';
-  });
+    if (!response.ok) {
+      throw new Error(data.error || 'Error al obtener código de partida');
+    }
 
-  return contenedor;
-}
+    // Mostrar el código real
+    codigoElement.textContent = data.codigoJuego;
+
+    // Event listeners
+    btnVer.addEventListener('click', () => {
+      window.location.href = '../participantes/participante.html';
+    });
+
+    
+  } catch (error) {
+    console.error('Error:', error);
+    codigoElement.textContent = 'Error al cargar código';
+    codigoElement.style.color = 'red';
+  }
+});

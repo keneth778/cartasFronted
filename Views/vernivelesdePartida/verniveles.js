@@ -47,7 +47,7 @@ btnCerrar.textContent = "Cerrar";
 btnCerrar.className = "btn-secundario";
 btnCerrar.addEventListener("click", () => {
   // ✅ Volver a la página de participantes
-  window.location.href = "participante.html";
+  window.location.href = "/Views/participantes/participante.html";
 });
 
 cuadro.appendChild(subtitulo);
@@ -55,11 +55,8 @@ cuadro.appendChild(nivelesBox);
 cuadro.appendChild(btnPodio);
 cuadro.appendChild(btnCerrar);
 
-let verNivelesBtn = document.createElement("button");
-verNivelesBtn.textContent = "⬇ Ver niveles";
-verNivelesBtn.className = "btn-ver-niveles";
+
 
 container.appendChild(header);
 container.appendChild(cuadro);
-container.appendChild(verNivelesBtn);
 contenedor.appendChild(container);
