@@ -124,7 +124,7 @@ guardarBtn.addEventListener('click', async () => {
 
   try {
     // Enviar datos al servidor
-    const response = await fetch('http://localhost:3000/api/actualizar-partida', {
+    const response = await fetch('https://cartasbackend.onrender.com/api/actualizar-partida', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

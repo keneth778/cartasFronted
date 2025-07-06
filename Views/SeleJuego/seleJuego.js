@@ -34,7 +34,7 @@ const juegos = ["Memoria", "Pregunta", "Conecta", "Selecciona"];
 // Función para crear nueva partida
 const crearPartida = async (tipoJuego) => {
   try {
-    const response = await fetch('http://localhost:3000/api/nueva-partida', {
+    const response = await fetch('https://cartasbackend.onrender.com/api/nueva-partida', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

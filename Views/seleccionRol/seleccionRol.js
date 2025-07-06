@@ -43,7 +43,7 @@ seleccion.appendChild(btnSalir);
 // Función para actualizar rol
 const actualizarRol = async (nuevoRol) => {
   try {
-    const response = await fetch('http://localhost:3000/api/actualizar-rol', {
+    const response = await fetch('https://cartasbackend.onrender.com/api/actualizar-rol', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

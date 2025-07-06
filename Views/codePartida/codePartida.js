@@ -114,7 +114,7 @@ async function verificarEstadoPartida(partidaId) {
   }
 
   try {
-    const response = await fetch(`http://localhost:3000/api/partida/${partidaId}/estado`);
+    const response = await fetch(`https://cartasbackend.onrender.com/api/partida/${partidaId}/estado`);
     
     // Verifica si la respuesta es JSON válido
     const text = await response.text();
@@ -248,7 +248,7 @@ btnIngresar.addEventListener('click', async () => {
     const idUsuario = usuario.id || generarIdTemporal();
 
     // 2. Registrar al alumno
-    const registroResponse = await fetch('http://localhost:3000/api/registrar-alumno', {
+    const registroResponse = await fetch('https://cartasbackend.onrender.com/api/registrar-alumno', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Validar que la partida está configurada correctamente
-            const validacionResponse = await fetch(`http://localhost:3000/api/validar-partida/${partidaActual.id}`);
+            const validacionResponse = await fetch(`https://cartasbackend.onrender.com/api/validar-partida/${partidaActual.id}`);
             const validacionData = await validacionResponse.json();
 
             if (!validacionResponse.ok || !validacionData.valida) {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Obtener configuración completa
-            const response = await fetch(`http://localhost:3000/api/partida/${partidaActual.id}`);
+            const response = await fetch(`https://cartasbackend.onrender.com/api/partida/${partidaActual.id}`);
             
             if (!response.ok) {
                 const errorData = await response.json();
@@ -379,7 +379,7 @@ async function guardarResultadoNivel(completado) {
             throw new Error('Datos de partida o alumno incompletos');
         }
 
-        const response = await fetch('http://localhost:3000/api/guardar-resultado-conecta', {
+        const response = await fetch('https://cartasbackend.onrender.com/api/guardar-resultado-conecta', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

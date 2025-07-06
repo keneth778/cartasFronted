@@ -32,7 +32,7 @@ async function cargarDatosReales(partidaId, contenedor) {
   lista.innerHTML = '<div class="cargando">Cargando resultados...</div>';
 
   try {
-    const response = await fetch(`http://localhost:3000/api/ranking-final/${partidaId}`);
+    const response = await fetch(`https://cartasbackend.onrender.com/api/ranking-final/${partidaId}`);
     const data = await response.json();
 
     if (!response.ok || !data.success) {

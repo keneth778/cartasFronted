@@ -3,7 +3,7 @@ const contenedor = document.getElementById('participantesFrame');
 async function cargarParticipantes() {
   try {
     const partidaActual = JSON.parse(localStorage.getItem('partidaActual'));
-    const response = await fetch(`http://localhost:3000/api/participantes/${partidaActual.id}`, {
+    const response = await fetch(`https://cartasbackend.onrender.com/api/participantes/${partidaActual.id}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
@@ -90,7 +90,7 @@ btnComenzar.addEventListener('click', async () => {
     }
 
     // Cambiar estado de la partida
-    const response = await fetch(`http://localhost:3000/api/partida/${partidaActual.id}/estado`, {
+    const response = await fetch(`https://cartasbackend.onrender.com/api/partida/${partidaActual.id}/estado`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

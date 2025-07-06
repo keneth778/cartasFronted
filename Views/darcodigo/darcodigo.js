@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     // Obtener el código real de la base de datos
     const partidaActual = JSON.parse(localStorage.getItem('partidaActual'));
-    const response = await fetch(`http://localhost:3000/api/partida/${partidaActual.id}`, {
+    const response = await fetch(`https://cartasbackend.onrender.com/api/partida/${partidaActual.id}`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`
       }
