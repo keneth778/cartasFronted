@@ -65,4 +65,60 @@ body {
    
   }
 
-  
+  /* Responsivo real para móviles */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        margin: 0;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    .login-container {
+        width: 100%;
+        padding: 20px 10px;
+        min-height: auto;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+    .logo {
+        width: 70px;
+        margin: 0 auto 15px auto;
+        display: block;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    form {
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        box-sizing: border-box;
+    }
+
+    .Ingreso {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .btnRegistro {
+        font-size: 0.9rem;
+        text-align: center;
+        margin-top: 10px;
+    }
+}

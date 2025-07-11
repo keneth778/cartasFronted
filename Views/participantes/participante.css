@@ -124,3 +124,56 @@ body {
   background: #8eb17d;
   border-radius: 10px;
 }
+@media (max-width: 480px) {
+  body {
+    padding: 20px;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .participantes-container {
+    width: 100%;
+    border: 1.2rem solid rgb(222, 242, 250); /* Borde menos grueso */
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .logo-participantes {
+    width: 90px; /* Logo más grande */
+    margin-bottom: 1.5rem;
+  }
+
+  .titulo-participantes {
+    font-size: 1.8rem; /* Título más visible */
+    margin-bottom: 1.5rem;
+  }
+
+  .lista-participantes {
+    max-height: 350px;
+    font-size: 1.2rem; /* Texto más grande */
+    margin-bottom: 2rem;
+  }
+
+  .lista-participantes li {
+    font-size: 1.1rem;
+    padding: 1rem;
+    gap: 12px;
+  }
+
+  .avatar-participante {
+    width: 45px;
+    height: 45px;
+  }
+
+  .btn-comenzar,
+  .btn-ver-niveles {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+  }
+
+  .check-icon {
+    font-size: 20px;
+  }
+}

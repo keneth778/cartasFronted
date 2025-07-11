@@ -71,3 +71,51 @@ h3 {
 .btn-siguiente:hover {
     background-color: rgb(198, 219, 139);
 }
+
+@media (max-width: 480px) {
+  body {
+    padding: 20px;
+    margin: 0;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+
+  .contenedor-darcodigo {
+    width: 100%;
+    border: 1rem solid rgb(222, 242, 250); /* Borde reducido */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .logo {
+    width: 70px;
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .codigo {
+    width: 100%;
+    max-width: 15rem;
+    font-size: 2rem;
+    padding: 12px;
+  }
+
+  h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+
+  .btn-ver,
+  .btn-siguiente {
+    width: 100%;
+    font-size: 1rem;
+    padding: 14px;
+    margin: 10px 0;
+  }
+}

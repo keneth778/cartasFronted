@@ -194,3 +194,93 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+@media (max-width: 480px) {
+  body {
+    flex-direction: column;
+    padding: 20px;
+    align-items: center;
+    height: auto;
+  }
+
+  .juego-container {
+    width: 100%;
+    padding: 20px;
+    border: 1.5rem solid #cff1c7;
+    border-radius: 15px;
+    margin: 200px 0;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+    margin: 0;
+  }
+
+  .titulo-juego {
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
+
+  .info-section {
+    flex-direction: row; /* <-- Cambio clave */
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .info-circulo {
+    width: 100px;
+    height: 100px;
+    font-size: 1rem;
+  }
+
+  .info-circulo span {
+    font-size: 1rem;
+  }
+
+  .info-circulo .valor {
+    font-size: 1.4rem;
+  }
+
+  .titulo-memoria {
+    font-size: 1.3rem;
+    margin: 10px 0;
+  }
+
+  .grid-cartas {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .carta {
+    max-height: 150px;
+    min-height: 90px;
+  }
+
+  .frente, .dorso {
+    border-radius: 8px;
+  }
+
+  .frente {
+    border: 5px solid white;
+  }
+
+  .btn-finalizar {
+    width: 100%;
+    max-width: 300px;
+    padding: 14px;
+    font-size: 1rem;
+    margin-top: 25px;
+  }
+}
